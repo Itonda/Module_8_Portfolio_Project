@@ -157,7 +157,7 @@ public class ProgramMenu {
         String confirm = scanner.nextLine();
 
         if (confirm.equalsIgnoreCase("Y")) {
-            String carDeleted = operations.getCarAsString(carIndex);
+            String carDeleted = operations.getCar(carIndex).toString();
             operations.deleteCar(carIndex);
             System.out.println(carDeleted + " deleted successfully!\n");
             carDeleted = null;
