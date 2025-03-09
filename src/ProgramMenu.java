@@ -153,7 +153,7 @@ public class ProgramMenu {
         }
 
         int carIndex = getValidNumber("Enter car number to delete: ", 1, operations.getCarCount()) - 1;
-        System.out.print("Are you sure you want to delete: " + operations.getCarAsString(carIndex) + " (Y/N)? ");
+        System.out.print("Are you sure you want to delete: " + operations.getCar(carIndex).toString() + " (Y/N)? ");
         String confirm = scanner.nextLine();
 
         if (confirm.equalsIgnoreCase("Y")) {
