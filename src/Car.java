@@ -2,23 +2,29 @@ public class Car {
     private String make;
     private String model;
     private String color;
+    private String vin;
     private int year;
     private int mileage;
+    private Double price;
     // Default Constructor
     public Car() {
         this.make = "make";
         this.model = "model";
         this.color = "color";
-        this.year = 0;
+        this.vin = "vin";
+        this.year = 1926;
         this.mileage = 0;
+        this.price = 0.0;
     }
     // Parameterized Constructor
-    public Car(String make, String model, String color, int year, int mileage) {
+    public Car(String make, String model, String color, String vin, int year, int mileage, Double price) {
         this.make = make;
         this.model = model;
         this.color = color;
         this.year = year;
         this.mileage = mileage;
+        this.vin = vin;
+        this.price = price;
     }
     // Setters
     public void setMake(String make) {
@@ -36,6 +42,12 @@ public class Car {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+    public void setPrice(Double price) {
+        this.price = price;
+    }
     // Getters
     public String getMake() {
         return make;
@@ -52,6 +64,12 @@ public class Car {
     public int getMileage() {
         return mileage;
     }
+    public String getVin() {
+        return vin;
+    }
+    public Double getPrice() {
+        return price;
+    }
     // Object String
     @Override
     public String toString() {
@@ -61,6 +79,8 @@ public class Car {
                 ", Color: " + color + '\'' +
                 ", Year: " + year +
                 ", Mileage: " + mileage +
+                ", VIN: " + vin + '\'' +
+                ", Price: " + "$" + price +
                 '}';
     }
 }
