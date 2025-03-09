@@ -61,7 +61,7 @@ public class ProgramMenu {
                 deleteCarMenu();
                 break;
             case 5:
-                operations.exportInventoryToTextFile("car_inventory.txt");
+                exportToFileMenu();
                 break;
             default:
                 System.out.println("Invalid selection. Please try again.");
@@ -72,12 +72,19 @@ public class ProgramMenu {
     private void addCarMenu() {
         System.out.println("\n-- Add Car to Inventory --");
         int numCars = getValidNumber("Number of cars to add: ", 1, 100);
+
         for (int i = 0; i < numCars; i++) {
             System.out.println("\nEnter car " + (operations.getCarCount() + 1) + " details:");
             Car car = getCarDetailsFromUser();
             operations.addCar(car);
         }
-        System.out.println("Cars added: " + numCars + "\n");
+        System.out.println("Cars added:");
+
+        for (int i = 0; i < numCars; i++) {
+            System.out.println(operations.getCarAsString(operations.getCarCount() - numCars + i));
+        }
+        System.out.println();
+
     }
     // Collects car attributes from the user
     private Car getCarDetailsFromUser() {
@@ -137,7 +144,7 @@ public class ProgramMenu {
         }
         System.out.println("Car updated successfully!\n");
     }
-    // Displays the menu for deleting cars, and deletes the selected car
+    // Displays the menu for deleting cars, confirms deletion
     private void deleteCarMenu() {
         operations.displayCarInventory();
         if (operations.getCarCount() == 0) {
@@ -146,14 +153,28 @@ public class ProgramMenu {
         }
 
         int carIndex = getValidNumber("Enter car number to delete: ", 1, operations.getCarCount()) - 1;
-        System.out.print("Are you sure you want to delete this car? (Y/N): ");
+        System.out.print("Are you sure you want to delete: " + operations.getCarAsString(carIndex) + " (Y/N)? ");
         String confirm = scanner.nextLine();
 
         if (confirm.equalsIgnoreCase("Y")) {
+            String carDeleted = operations.getCarAsString(carIndex);
             operations.deleteCar(carIndex);
-            System.out.println("Car deleted successfully!\n");
+            System.out.println(carDeleted + " deleted successfully!\n");
+            carDeleted = null;
         } else {
             System.out.println("Deletion cancelled.\n");
+        }
+
+    }
+    // Confirms the export of the inventory to a text file
+    private void exportToFileMenu() {
+        System.out.print("Are you sure you want to export the inventory? (Y/N): ");
+        String confirm = scanner.nextLine();
+
+        if (confirm.equalsIgnoreCase("Y")) {
+            operations.exportInventoryToTextFile("car_inventory.txt");
+        } else {
+            System.out.println("Export cancelled.\n");
         }
     }
     // Validates number inputs

@@ -20,36 +20,45 @@ public class ProgramOperations {
     public void addCar(Car car) {
         carsList.add(car);
     }
+    // Displays the car inventory
+    public void displayCarInventory() {
+        System.out.println(getCarInventoryAsString());
+    }
     // Builds formatted string of car inventory
     public String getCarInventoryAsString() {
         if (carsList.isEmpty()) {
             return "Car inventory is empty.";
         }
         StringBuilder output = new StringBuilder("Cars in inventory:\n");
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+
         for (int i = 0; i < carsList.size(); i++) {
-            Car car = carsList.get(i);
-            output.append("Car ").append(i + 1)
-                    .append(" [Make: ").append(car.getMake())
-                    .append(" / Model: ").append(car.getModel())
-                    .append(" / Color: ").append(car.getColor())
-                    .append(" / Year: ").append(car.getYear())
-                    .append(" / Mileage: ").append(numberFormat.format(car.getMileage()))
-                    .append(" / VIN: ").append(car.getVin())
-                    .append(" / Price: $").append(numberFormat.format(car.getPrice())).append("]\n");
+            output.append(getCarAsString(i)).append("\n");
         }
         return output.toString();
     }
-    // Displays the car inventory
-    public void displayCarInventory() {
-        System.out.println(getCarInventoryAsString());
+    // Returns a formatted string of a specific car's details
+    public String getCarAsString(int index) {
+        if (index < 0 || index >= carsList.size()) {
+            return "Invalid car index.";
+        }
+        Car car = carsList.get(index);
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        return "Car " + (index + 1) + " [Make: " + car.getMake() +
+                " / Model: " + car.getModel() +
+                " / Color: " + car.getColor() +
+                " / Year: " + car.getYear() +
+                " / Mileage: " + numberFormat.format(car.getMileage()) +
+                " / VIN: " + car.getVin() +
+                " / Price: $" + numberFormat.format(car.getPrice()) + "]";
     }
-    // Exports the car inventory to a text file
+    // Exports the car inventory to a text file to a predefined location
     public void exportInventoryToTextFile(String filename) {
+        String directory = "C:\\Temp\\";
+        String filePath = directory + filename;
         String inventoryString = getCarInventoryAsString();
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             writer.print(inventoryString);
-            System.out.println("Inventory exported to " + filename + "\n");
+            System.out.println("Inventory successfully exported to " + filePath + "\n");
         } catch (IOException e) {
             System.out.println("Error exporting inventory: " + e.getMessage() + "\n");
 
