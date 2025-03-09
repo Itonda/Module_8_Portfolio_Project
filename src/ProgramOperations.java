@@ -39,7 +39,7 @@ public class ProgramOperations {
         StringBuilder output = new StringBuilder("Cars in inventory:\n");
 
         for (int i = 0; i < carsList.size(); i++) {
-            output.append(getCarAsString(i)).append("\n");
+            output.append("Car ").append(i + 1).append(": ").append(carsList.get(i).toString()).append("\n");
         }
         return output.toString();
     }
