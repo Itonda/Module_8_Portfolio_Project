@@ -1,3 +1,6 @@
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Car {
     private String make;
     private String model;
@@ -73,14 +76,13 @@ public class Car {
     // Object String
     @Override
     public String toString() {
-        return "Car {" +
-                "Make: " + make + '\'' +
-                ", Model: " + model + '\'' +
-                ", Color: " + color + '\'' +
-                ", Year: " + year +
-                ", Mileage: " + mileage +
-                ", VIN: " + vin + '\'' +
-                ", Price: " + "$" + price +
-                '}';
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        return  "[Make: " + make +
+                " / Model: " + model +
+                " / Color: " + color +
+                " / Year: " + year +
+                " / Mileage: " + numberFormat.format(mileage) +
+                " / VIN: " + vin +
+                " / Price: $" + numberFormat.format(price) + "]";
     }
 }

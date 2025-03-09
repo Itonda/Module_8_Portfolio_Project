@@ -1,9 +1,8 @@
 import java.util.Scanner;
 import java.util.function.Function;
-
 /**
  * Class that represents the menu for the car inventory program.
- */
+ **/
 public class ProgramMenu {
     private ProgramOperations operations = new ProgramOperations();
     private Scanner scanner = new Scanner(System.in);
@@ -81,7 +80,8 @@ public class ProgramMenu {
         System.out.println("Cars added:");
 
         for (int i = 0; i < numCars; i++) {
-            System.out.println(operations.getCar(operations.getCarCount() - numCars + i).toString());
+            int carNumber = operations.getCarCount() - numCars + i + 1;
+            System.out.println("Car " + carNumber + ": " + operations.getCar(operations.getCarCount() - numCars + i).toString());
         }
         System.out.println();
     }
