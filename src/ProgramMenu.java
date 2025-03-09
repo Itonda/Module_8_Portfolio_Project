@@ -81,10 +81,9 @@ public class ProgramMenu {
         System.out.println("Cars added:");
 
         for (int i = 0; i < numCars; i++) {
-            System.out.println(operations.getCarAsString(operations.getCarCount() - numCars + i));
+            System.out.println(operations.getCar(operations.getCarCount() - numCars + i).toString());
         }
         System.out.println();
-
     }
     // Collects car attributes from the user
     private Car getCarDetailsFromUser() {
@@ -92,7 +91,6 @@ public class ProgramMenu {
         String model = getStringInput("Enter Model: ");
         String color = getStringInput("Enter Color: ");
         String vin = getStringInput("Enter VIN: ");
-
         int year = getValidNumber("Enter Year: ", 1926, 2100);
         int mileage = getValidNumber("Enter Mileage: ", 0, Integer.MAX_VALUE);
         double price = getValidDouble("Enter Price: ", 0, Double.MAX_VALUE);
@@ -160,11 +158,9 @@ public class ProgramMenu {
             String carDeleted = operations.getCar(carIndex).toString();
             operations.deleteCar(carIndex);
             System.out.println(carDeleted + " deleted successfully!\n");
-            carDeleted = null;
         } else {
             System.out.println("Deletion cancelled.\n");
         }
-
     }
     // Confirms the export of the inventory to a text file
     private void exportToFileMenu() {
@@ -205,11 +201,9 @@ public class ProgramMenu {
     private int getMenuInput(int min, int max) {
         return getValidInput("Make a selection: ", min, max, Integer::parseInt);
     }
-
     private int getValidNumber(String prompt, int min, int max) {
         return getValidInput(prompt, min, max, Integer::parseInt);
     }
-
     private double getValidDouble(String prompt, double min, double max) {
         return getValidInput(prompt, min, max, Double::parseDouble);
     }
