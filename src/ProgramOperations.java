@@ -20,6 +20,13 @@ public class ProgramOperations {
     public void addCar(Car car) {
         carsList.add(car);
     }
+    // Retrieves a car from the inventory by index
+    public Car getCar(int index) {
+        if (index < 0 || index >= carsList.size()) {
+            return null;
+        }
+        return carsList.get(index);
+    }
     // Displays the car inventory
     public void displayCarInventory() {
         System.out.println(getCarInventoryAsString());
